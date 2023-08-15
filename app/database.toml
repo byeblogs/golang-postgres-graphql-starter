@@ -1,9 +1,9 @@
 [psql]
-dbname     = "GO_POSTGRES_GRAPHQL_DB"
+dbname     = "golang-postgres-graphql-starter"
 host       = "localhost"
 port       = 5432
-user       = "user"
-pass       = "pass"
+user       = "killabyss"
+pass       = "password"
 sslmode    = "disable"
 whitelist = [
     "todos",

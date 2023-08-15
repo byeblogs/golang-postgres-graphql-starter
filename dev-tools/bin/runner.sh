@@ -16,7 +16,7 @@ case ${1} in
  ;;
 "db:migrate")
  echo  === db migrate start ===
- migrate -source file://app/database/migrations -database 'postgres://user:pass@localhost:5432/GO_POSTGRES_GRAPHQL_DB?sslmode=disable' up
+ migrate -source file://app/database/migrations -database 'postgres://killabyss:password@localhost:5432/golang-postgres-graphql-starter?sslmode=disable' up
  echo  === db migrate end ===
  ;;
 "db:seed")
@@ -28,17 +28,17 @@ case ${1} in
  ;;
 "db:rollback")
  echo  === db rollback start ===
- migrate -source file://app/database/migrations -database 'postgres://user:pass@localhost:5432/GO_POSTGRES_GRAPHQL_DB?sslmode=disable' down
+ migrate -source file://app/database/migrations -database 'postgres://killabyss:password@localhost:5432/golang-postgres-graphql-starter?sslmode=disable' down
  echo  === db rollback end ===
  ;;
 "db:reset")
  # db:rollback
  echo  === db rollback start ===
- migrate -source file://app/database/migrations -database 'postgres://user:pass@localhost:5432/GO_POSTGRES_GRAPHQL_DB?sslmode=disable' down
+ migrate -source file://app/database/migrations -database 'postgres://killabyss:password@localhost:5432/golang-postgres-graphql-starter?sslmode=disable' down
  echo  === db rollback end ===
  # db:migrate
  echo  === db migrate start ===
- migrate -source file://app/database/migrations -database 'postgres://user:pass@localhost:5432/GO_POSTGRES_GRAPHQL_DB?sslmode=disable' up
+ migrate -source file://app/database/migrations -database 'postgres://killabyss:password@localhost:5432/golang-postgres-graphql-starter?sslmode=disable' up
  echo  === db migrate end ===
  # db:seed
  echo  === db seed start ===

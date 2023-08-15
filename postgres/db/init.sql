@@ -1,1 +1,1 @@
-CREATE DATABASE GO_POSTGRES_GRAPHQL_DB;
+CREATE DATABASE golang-postgres-graphql-starter;

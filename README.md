@@ -1,8 +1,8 @@
-# go-boilerplate-docker-graphql-postgres
+# golang-postgres-graphql-starter
 
-golang GraphQL ボイラーテンプレート
+golang GraphQL boiler template
 
-## 技術構成
+## Technical composition
 - go: 1.18
 - postgres
 - gqlgen
@@ -14,34 +14,35 @@ golang GraphQL ボイラーテンプレート
 - golang-migrate
 - github actions
 
-## 仕様
-- ログイン機能付きのTodoリスト
-  - 認証処理はcookie形式を採用 (userIDをjwtトークンに変換し、http onlyのcookieにセット)
+## specification
+- Todo list with login function
+  - Adopt cookie format for authentication process (convert userID to jwt token and set to http only cookie)
 
-## 主な機能
-### 認証権限なし
-- ログイン
-- 会員登録
-- ログアウト
+## Main function
+### No authentication authority
+- login
+- Member registration
+- logout
 
-### 認証権限あり
+### Authorized
 - Todo
-  - Todoリスト取得
-  - Todo詳細取得
-  - Todo新規登録
-  - Todo更新処理
-  - Todo削除処理
+  - Get Todo list
+  - Todo detailed acquisition
+  - TodoNew registration
+  - Todo update process
+  - Todo deletion process
+
 - User
-  - ユーザー情報取得
-  - ユーザー名変更処理
-  - メールアドレス変更処理
-  - パスワード変更処理
-  - ユーザー画像登録、変更処理
-    - 画像ファイルはS3に保存
-    - ※S3の設定は各自実施してください。
+  - Get user information
+  - User name change process
+  - Email address change process
+  - Password change process
 
+  - User image registration, change processing
+    - Image files are stored in S3
+    - *Please set S3 by yourself.
 
-## GRAPHQLスキーマ
+## GRAPHQL schema
 
 ### User
 - https://github.com/YukiOnishi1129/go-boilerplate-docker-graphql-postgres/blob/main/graphql/user.graphql
@@ -49,8 +50,8 @@ golang GraphQL ボイラーテンプレート
 - https://github.com/YukiOnishi1129/go-boilerplate-docker-graphql-postgres/blob/main/graphql/todo.graphql
 
 
-## 環境構築
-### 1. envファイルを作成
+## Environment
+### 1. Create env file
 ```
 // ルートディレクトリ直下に「.env」ファイルを作成
 touch .env
@@ -64,44 +65,44 @@ touch app/.env
 //「app/.env.sample」の記述を「app/.env」にコピー
 ```
 
-### 2. docker起動
-- ビルド
+### 2. Start docker
+- build
 ```
 docker-compose build
 ```
 
-- コンテナ起動
+- container start
 ```
 docker-compose up -d
 ```
 
-### 3. マイグレーション
-- golang-migrateをmacにインストール
+### 3. Migration
+- Install golang-migrate on mac
 ```
  brew install golang-migrate
 ```
 
-- マイグレーションを実行
-- ※ DBコンテナを事前に起動しておくこと
+- Run migration
+- ※ * Start the DB container in advance
 ```
 // ルートディレクトリで実行
 ./dev-tools/bin/db:migrate
 ```
 
-- シーダー実行
+- seeder run
 ```
 // ルートディレクトリで実行
 ./dev-tools/bin/db:seed
 ```
 
-### 4. GraphQL実行環境
-- `localhost:4000`でGraphiQLが立ち上がる
-  - graphqlのクエリーを実行できるようになります。
+### 4. GraphQL execution environment
+- `localhost:4000` GraphiQL starts up with
+  - You will be able to execute graphql queries.
+
   - ![スクリーンショット 2022-04-16 6 49 13](https://user-images.githubusercontent.com/58220747/163649363-ae18280f-cab9-42f1-91aa-6ac1637ebc44.png)
 
-  
-  - クエリについては以下を参照
-- query, mutation, fragmentは以下を記載
+  - See below for queries
+- query, mutation, fragment are described below
 ```
 # Todoリスト一覧取得
 query getTodoList {
@@ -250,60 +251,60 @@ fragment userDetail on User {
 }
 ```
 
-- ユーザー画像作成・変更処理はAWS S3の設定と、Altair GraphQL Clientでの実行確認が必須です。
-  - Alter GraphQL Clientを用いた画像アップロードの確認方法についてはこちら
+- User image creation/change processing requires AWS S3 settings and execution confirmation with Altair GraphQL Client.
+  - Click here for how to check image upload using Alter GraphQL Client
   - https://www.wantedly.com/companies/visitsworks/post_articles/330336
 
-## 開発用コマンド
-- 以下のコマンドは全てルートディレクトリで実行すること
-### モデルファイル自動生成
-  - SqlBoilerを用いて、テーブル構造からモデルを生成する (gormとは逆のパターンで生成)
-  - ※事前にDBコンテナを立ち上げておくこと
+## development commands
+- All commands below should be executed in the root directory
+### Automatic model file generation
+  - Generate a model from the table structure using SqlBoiler (Generate in the opposite pattern of gorm)
+  - * Start up the DB container in advance
 ```
 ./dev-tools/bin/runner.sh entity:create
 ```
 
-### マイグレーション
-- テーブル作成
-- ※事前にDBコンテナを立ち上げておくこと
+### migration
+- table creation
+- * Start up the DB container in advance
 ```
 ./dev-tools/bin/runner.sh db:migrate
 ```
 
-### シーディング
-- データ登録
-- ※事前にDBコンテナを立ち上げておくこと
+### seeding
+- Data registration
+- * Start up the DB container in advance
 ```
 ./dev-tools/bin/runner.sh db:seed
 ```
 
-### ロールバック
-- テーブル設定を初期化
-- ※事前にDBコンテナを立ち上げておくこと
+### roll back
+- Initialize table settings
+- * Start up the DB container in advance
 ```
 ./dev-tools/bin/runner.sh db:rollback
 ```
 
-### データ初期化
-- ロールバック、マイグレーション、シーディングを一気に実行してテーブルデータを初期化する
-- ※事前にDBコンテナを立ち上げておくこと
+### Data initialization
+- Initialize table data by executing rollback, migration, and seeding all at once
+- * Start up the DB container in advance
 ```
 ./dev-tools/bin/runner.sh db:reset
 ```
 
-### 静的解析 (lint)
+### static analysis (lint)
 ```
 ./dev-tools/bin/runner.sh lint
 ```
 
-### テスト
-全てのテストを実行
+### test
+run all tests
 ```
 ./dev-tools/bin/runner.sh test:all
 ```
 
 ### graphql generate
-- graphqlスキーマファイルからresolverなどを自動生成
+- Automatically generate resolver etc. from graphql schema file
 ```
 ./dev-tools/bin/runner.sh gql
 ```

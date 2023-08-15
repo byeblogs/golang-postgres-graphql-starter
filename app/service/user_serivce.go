@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/YukiOnishi1129/go-boilerplate-docker-graphql-postgres/app/database/entity"
 	"github.com/YukiOnishi1129/go-boilerplate-docker-graphql-postgres/app/graph/model"

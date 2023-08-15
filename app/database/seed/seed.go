@@ -3,14 +3,15 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"os"
+
 	"github.com/YukiOnishi1129/go-boilerplate-docker-graphql-postgres/app/database/seed/seeders"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-	"os"
 )
 
 func main() {
-	err := godotenv.Load(".env")
+	err := godotenv.Load("../.env")
 	if err != nil {
 		fmt.Printf("読み込み出来ませんでした: %v", err)
 		panic(err)
